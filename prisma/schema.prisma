@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Book {
-  bookId          String @id @default(uuid())
+  bookId          String         @id @default(uuid())
   title           String
   genre           String
   publishedYear   Int
@@ -22,6 +22,7 @@ model Book {
   availableCopies Int
   // createdAt          DateTime   @default(now())
   // updatedAt          DateTime   @updatedAt
+  borrowRecord    BorrowRecord[]
 
   @@map("books")
 }
@@ -35,15 +36,25 @@ model Author {
   @@map("authors")
 }
 
-enum UserRole {
-  SUPER_ADMIN
-  ADMIN
-  DOCTOR
-  PATIENT
+model Member {
+  memberId       String   @id @default(uuid())
+  name           String
+  email          String   @unique
+  phone          String
+  membershipDate DateTime @default(now())
+  borrowRecords  BorrowRecord[]
+  
+  @@map("members")
 }
 
-enum UserStatus {
-  ACTIVE
-  BLOCKED
-  DELETED
+model BorrowRecord {
+  borrowId   String   @id @default(uuid())
+  borrowDate DateTime @default(now())
+  returnDate DateTime
+  bookId     String
+  memberId   String
+  book       Book @relation(fields: [bookId], references: [bookId])
+  member     Member @relation(fields: [memberId], references: [memberId])
+
+  @@map("borrowRecords")
 }
