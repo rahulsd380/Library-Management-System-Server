@@ -13,7 +13,7 @@ const sendResponse = <T>(res: Response, jsonData: {
 }) => {
     res.status(jsonData.status).json({
         success: jsonData.success,
-        status : jsonData.status,
+        status: jsonData.status,
         message: jsonData.message,
         meta: jsonData.meta || null || undefined,
         data: jsonData.data || null || undefined
