@@ -55,7 +55,7 @@ const updateBookData = catchAsync(async (req: Request, res: Response) => {
 // Delete book by id
 const deleteBookById = catchAsync(async (req: Request, res: Response) => {
     const {bookId} = req.params;
-    const result = await BookServices.deleteBookById(bookId);
+    await BookServices.deleteBookById(bookId);
     sendResponse(res, {
         success: true,
         status: 200,
