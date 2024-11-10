@@ -1,6 +1,7 @@
 import { Book } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 
+// Add new book
 const addBook = async (payload: Book) => {
     const result = await prisma.book.create({
         data:payload
@@ -8,8 +9,19 @@ const addBook = async (payload: Book) => {
     return result;
 };
 
+// Get all books
 const getAllBooks = async () => {
     const result = await prisma.book.findMany()
+    return result;
+};
+
+// Get all books
+const getSingleBookById = async (bookId:string) => {
+    const result = await prisma.book.findUniqueOrThrow({
+        where : {
+            bookId : bookId
+        }
+    })
     return result;
 };
 
@@ -67,5 +79,6 @@ const getAllBooks = async () => {
 
 export const BookServices = {
     addBook,
-    getAllBooks
+    getAllBooks,
+    getSingleBookById
 }

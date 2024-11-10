@@ -3,7 +3,7 @@ import { BookServices } from "./books.service";
 import { catchAsync } from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 
-
+// Add new book
 const addBook = catchAsync(async (req: Request, res: Response) => {
     const result = await BookServices.addBook(req.body);
     sendResponse(res, {
@@ -18,6 +18,19 @@ const addBook = catchAsync(async (req: Request, res: Response) => {
 // Get all books
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
     const result = await BookServices.getAllBooks();
+    sendResponse(res, {
+        success: true,
+        status: 200,
+        message: "Books retrieved successfully",
+        data: result
+    });
+})
+
+
+// Get all books
+const getSingleBookById = catchAsync(async (req: Request, res: Response) => {
+    const {bookId} = req.params;
+    const result = await BookServices.getSingleBookById(bookId);
     sendResponse(res, {
         success: true,
         status: 200,
@@ -64,4 +77,5 @@ const getAllBooks = catchAsync(async (req: Request, res: Response) => {
 export const BookControllers = {
     addBook,
     getAllBooks,
+    getSingleBookById,
 }

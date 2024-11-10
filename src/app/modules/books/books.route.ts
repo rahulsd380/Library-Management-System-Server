@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/', BookControllers.addBook);
 router.get('/', BookControllers.getAllBooks);
+router.get('/:bookId', BookControllers.getSingleBookById);
 // router.get("/:id", AdminControllers.getAdminById);
 // router.patch("/:id", validateRequest(adminValidationsSchemas.updateAdminInfo), AdminControllers.updateAdminData);
 // router.delete("/:id", AdminControllers.deleteAdmin);
