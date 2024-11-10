@@ -27,40 +27,31 @@ const getAllBooks = catchAsync(async (req: Request, res: Response) => {
 })
 
 
-// Get all books
+// Get single book by id
 const getSingleBookById = catchAsync(async (req: Request, res: Response) => {
     const {bookId} = req.params;
     const result = await BookServices.getSingleBookById(bookId);
     sendResponse(res, {
         success: true,
         status: 200,
-        message: "Books retrieved successfully",
+        message: "Book retrieved successfully",
         data: result
     });
 })
 
 
-// const getBookById = catchAsync(async (req: Request, res: Response) => {
-//     const result = await BookServices.addBook(req.body);
-//     sendResponse(res, {
-//         success: true,
-//         status: 201,
-//         message: "Book Added Successfully.",
-//         data: result
-//     });
-// })
+// Get all books
+const updateBookData = catchAsync(async (req: Request, res: Response) => {
+    const {bookId} = req.params;
+    const result = await BookServices.updateBookData(bookId, req.body);
+    sendResponse(res, {
+        success: true,
+        status: 200,
+        message: "Book updated  successfully",
+        data: result
+    });
+})
 
-// const updateAdminData = catchAsync(async (req: Request, res: Response) => {
-
-//     const { id } = req.params;
-//     const result = await AdminServices.updateAdminData(id, req.body);
-//     sendResponse(res, {
-//         statusCode: 200,
-//         success: true,
-//         message: "Admin Data Updated Successfully.",
-//         data: result
-//     })
-// })
 
 // const deleteAdmin = catchAsync(async (req: Request, res: Response) => {
 //     const { id } = req.params;
@@ -78,4 +69,5 @@ export const BookControllers = {
     addBook,
     getAllBooks,
     getSingleBookById,
+    updateBookData,
 }

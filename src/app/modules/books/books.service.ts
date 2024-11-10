@@ -26,35 +26,21 @@ const getSingleBookById = async (bookId:string) => {
 };
 
 
-// const getAdminById = async (id:string) : Promise<Book | null> => {
-//     const result = await prisma.book.findUnique({
-//         where : {
-//             id,
-//             isDeleted : false
-//         }
-//     });
-//     return result;
-// };
-
-// const updateAdminData = async (id:string, data : Partial<Admin>): Promise<Admin> => {
-//     const isAdminExists = await prisma.admin.findUnique({
-//         where : {
-//             id,
-//             isDeleted : false
-//         }
-//     });
-//     if(!isAdminExists){
-//         throw new Error("Admin not found");
-//     }
-//     const result = await prisma.admin.update({
-//         where : {
-//             id,
-//             isDeleted : false
-//         },
-//         data
-//     });
-//     return result;
-// };
+const updateBookData = async (bookId:string, payload : Partial<Book>): Promise<Book> => {
+    await prisma.book.findUniqueOrThrow({
+        where : {
+            bookId,
+        }
+    });
+    
+    const result = await prisma.book.update({
+        where : {
+            bookId
+        },
+        data : payload
+    });
+    return result;
+};
 
 // const deleteAdmin = async (id:string): Promise<Admin | null> => {
 //     const result = await prisma.$transaction(async(transactionClient) => {
@@ -80,5 +66,6 @@ const getSingleBookById = async (bookId:string) => {
 export const BookServices = {
     addBook,
     getAllBooks,
-    getSingleBookById
+    getSingleBookById,
+    updateBookData
 }
