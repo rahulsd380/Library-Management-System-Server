@@ -5,7 +5,11 @@ const addBook = async (payload: Book) => {
     const result = await prisma.book.create({
         data:payload
     });
+    return result;
+};
 
+const getAllBooks = async () => {
+    const result = await prisma.book.findMany()
     return result;
 };
 
@@ -63,4 +67,5 @@ const addBook = async (payload: Book) => {
 
 export const BookServices = {
     addBook,
+    getAllBooks
 }

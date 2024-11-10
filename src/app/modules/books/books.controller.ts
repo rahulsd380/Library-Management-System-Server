@@ -6,7 +6,6 @@ import sendResponse from "../../../shared/sendResponse";
 
 const addBook = catchAsync(async (req: Request, res: Response) => {
     const result = await BookServices.addBook(req.body);
-
     sendResponse(res, {
         success: true,
         status: 201,
@@ -15,13 +14,25 @@ const addBook = catchAsync(async (req: Request, res: Response) => {
     });
 })
 
-// const getAdminById = catchAsync(async (req: Request, res: Response) => {
-//     const { id } = req.params;
-//     const result = await AdminServices.getAdminById(id);
+
+// Get all books
+const getAllBooks = catchAsync(async (req: Request, res: Response) => {
+    const result = await BookServices.getAllBooks();
+    sendResponse(res, {
+        success: true,
+        status: 200,
+        message: "Books retrieved successfully",
+        data: result
+    });
+})
+
+
+// const getBookById = catchAsync(async (req: Request, res: Response) => {
+//     const result = await BookServices.addBook(req.body);
 //     sendResponse(res, {
-//         statusCode: 200,
 //         success: true,
-//         message: "Admin Fetched Successfully.",
+//         status: 201,
+//         message: "Book Added Successfully.",
 //         data: result
 //     });
 // })
@@ -52,4 +63,5 @@ const addBook = catchAsync(async (req: Request, res: Response) => {
 
 export const BookControllers = {
     addBook,
+    getAllBooks,
 }
