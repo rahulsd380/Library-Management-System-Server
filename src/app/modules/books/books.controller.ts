@@ -40,29 +40,28 @@ const getSingleBookById = catchAsync(async (req: Request, res: Response) => {
 })
 
 
-// Get all books
+// Update book data
 const updateBookData = catchAsync(async (req: Request, res: Response) => {
     const {bookId} = req.params;
     const result = await BookServices.updateBookData(bookId, req.body);
     sendResponse(res, {
         success: true,
         status: 200,
-        message: "Book updated  successfully",
+        message: "Book updated successfully",
         data: result
     });
 })
 
-
-// const deleteAdmin = catchAsync(async (req: Request, res: Response) => {
-//     const { id } = req.params;
-//     const result = await AdminServices.deleteAdmin(id);
-//     sendResponse(res, {
-//         statusCode: 200,
-//         success: true,
-//         message: "Admin Deleted Successfully.",
-//         data: result
-//     })
-// })
+// Delete book by id
+const deleteBookById = catchAsync(async (req: Request, res: Response) => {
+    const {bookId} = req.params;
+    const result = await BookServices.deleteBookById(bookId);
+    sendResponse(res, {
+        success: true,
+        status: 200,
+        message: "Book successfully deleted",
+    });
+})
 
 
 export const BookControllers = {
@@ -70,4 +69,5 @@ export const BookControllers = {
     getAllBooks,
     getSingleBookById,
     updateBookData,
+    deleteBookById,
 }

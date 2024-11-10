@@ -9,7 +9,7 @@ const sendResponse = <T>(res: Response, jsonData: {
         limit: number,
         total: number
     },
-    data: T | null | undefined
+    data?: T | null | undefined
 }) => {
     res.status(jsonData.status).json({
         success: jsonData.success,

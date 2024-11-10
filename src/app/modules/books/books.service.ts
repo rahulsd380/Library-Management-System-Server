@@ -15,7 +15,7 @@ const getAllBooks = async () => {
     return result;
 };
 
-// Get all books
+// Get single book by id
 const getSingleBookById = async (bookId:string) => {
     const result = await prisma.book.findUniqueOrThrow({
         where : {
@@ -25,7 +25,7 @@ const getSingleBookById = async (bookId:string) => {
     return result;
 };
 
-
+// Update book data
 const updateBookData = async (bookId:string, payload : Partial<Book>): Promise<Book> => {
     await prisma.book.findUniqueOrThrow({
         where : {
@@ -38,6 +38,21 @@ const updateBookData = async (bookId:string, payload : Partial<Book>): Promise<B
             bookId
         },
         data : payload
+    });
+    return result;
+};
+
+// Delete book by id
+const deleteBookById = async (bookId:string): Promise<Book> => {
+    await prisma.book.findUniqueOrThrow({
+        where : {
+            bookId,
+        }
+    });
+    const result = await prisma.book.delete({
+        where : {
+            bookId
+        }
     });
     return result;
 };
@@ -67,5 +82,6 @@ export const BookServices = {
     addBook,
     getAllBooks,
     getSingleBookById,
-    updateBookData
+    updateBookData,
+    deleteBookById
 }
