@@ -11,5 +11,5 @@ const borrowBook = async (payload: BorrowRecord) => {
 
 
 export const BorrowBookServices = {
-    borrowBook,
+    borrowBook
 }

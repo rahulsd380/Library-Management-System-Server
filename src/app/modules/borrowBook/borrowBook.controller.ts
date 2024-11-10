@@ -11,16 +11,16 @@ const borrowBook = catchAsync(async (req: Request, res: Response) => {
         status: 200,
         message: "Book borrowed successfully",
         data: {
-            borrowId: result.bookId,
+            borrowId: result.borrowId,
             bookId: result.bookId,
             memberId: result.memberId,
             borrowDate: result.borrowDate
         }
     });
-})
+});
 
 
 
 export const BorrowBookControllers = {
-    borrowBook,
+    borrowBook
 }
