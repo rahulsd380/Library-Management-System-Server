@@ -1,5 +1,6 @@
 import { Book } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
+import { AppError } from "../../../helpers/AppError";
 
 // Add new book
 const addBook = async (payload: Book) => {
@@ -17,6 +18,9 @@ const getAllBooks = async () => {
 
 // Get single book by id
 const getSingleBookById = async (bookId:string) => {
+    if (!bookId) {
+        return new AppError('Invalid book ID', 400);
+      }
     const result = await prisma.book.findUniqueOrThrow({
         where : {
             bookId : bookId

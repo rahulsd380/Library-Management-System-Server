@@ -8,7 +8,7 @@ export const catchAsync = (fn:RequestHandler) => {
         } catch (error) {
             console.error(error);
             sendResponse(res, {
-                statusCode: 500,
+                status: 500,
                 success: false,
                 message: "Internal Server Error",
                 data: null
